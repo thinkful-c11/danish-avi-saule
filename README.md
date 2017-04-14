@@ -24,23 +24,17 @@ $ npm install
 
 You can run it locally now with `npm run dev`, but the Google OAuth stuff won't work without your own credentials.
 
-### Get Google OAuth Credentials
+### Get Github OAuth Credentials
 
-Visit https://console.developers.google.com
+### For development
 
-* Navigate to Library 
-* Under 'Social APIs', Click 'Google+ API'
-* Click 'Enable' at the top (if it isn't already)
+Visit https://github.com/settings/developers
 
+Click 'Register a new application'
 
-* Navigate to Credentials
-* It may require you to configure OAuth consent screen.
-* Click 'Create credentials'
-* Choose 'OAuth Client ID'
-* Choose 'Web application'
-* Add `http://localhost:8080` to Authorized JavaScript origins
-* Add `http://localhost:8080/api/auth/google/callback` to Authorized redirect URIs
-* Click 'Create'
+- Add `http://localhost:8080` as Homepage URL
+- Add `http://localhost:8080/api/auth/github/callback` as Authorization callback URL
+- Click 'Register application'
 
 You should get a Client ID and Secret.
 
@@ -83,17 +77,15 @@ $ heroku config:set CLIENT_ID=yourId123.apps.googleusercontent.com CLIENT_SECRET
 $ git push heroku master
 ```
 
-Your app should be live on Heroku soon, but if you try to `Log in with Google`, you will get a 400 error. Take note of your new app's URL.
+Your app should be live on Heroku soon, but if you try to `Log in with Github`, you will get an error. Take note of your new app's URL.
 
+#### Create another set of Github OAuth credentials
 
-#### Updating Google API authorized origins
+To fix this, go back to the (Github API Dashboard)[https://github.com/settings/developers] and:
 
+(You might need to use `http` (not `https`) for your Heroku URLs)
 
-To fix this, go back to the Google API Dashboard and:
+- Add `http://your-app-name-123.herokuapp.com` to Homepage URL
+- Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorization callback URL
 
-(You might need to use `http` and or `http` for your Heroku URIs)
-
-- Add `http://your-app-name-123.herokuapp.com` to Authorized JavaScript origins
-- Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorized redirect URIs
-
-Try to log in  `Log in with Google` again, and you're golden!
+Try to log in  `Log in with Github` again, and you're golden!

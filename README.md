@@ -22,7 +22,7 @@ $ cd spaced-repetition-starter
 $ npm install
 ```
 
-You can run it locally now with `npm run dev`, but the Google OAuth stuff won't work without your own credentials.
+You can run it locally now with `npm run dev`, but the Github OAuth stuff won't work without your own credentials.
 
 ### Get Github OAuth Credentials
 
@@ -40,11 +40,11 @@ You should get a Client ID and Secret.
 
 Back in your project locally, create an `secret.js` file in the `/server` directory:
 
-(Use the client ID and secret we just got from Google)
+(Use the client ID and secret we just got from Github)
 
 ```js
 module.exports = {
-  CLIENT_ID: 'yourId123.apps.googleusercontent.com',
+  CLIENT_ID: 'yourId123',
   CLIENT_SECRET: 'yoursecret'
 }
 ```
@@ -63,10 +63,10 @@ This file is in ignored by git because it is in your `.gitignore`. Never commit 
 $ heroku create
 ```
 
-Configure your Google client id and secret on Heroku:
+Configure your Github client id and secret on Heroku:
 
 ```sh
-$ heroku config:set CLIENT_ID=yourId123.apps.googleusercontent.com CLIENT_SECRET=yoursecret
+$ heroku config:set CLIENT_ID=yourId123 CLIENT_SECRET=yoursecret
 ```
 
 (You can also do this on dashboard.heroku.com under your app's settings.)
@@ -86,6 +86,6 @@ To fix this, go back to the (Github API Dashboard)[https://github.com/settings/d
 (You might need to use `http` (not `https`) for your Heroku URLs)
 
 - Add `http://your-app-name-123.herokuapp.com` to Homepage URL
-- Add `http://your-app-name-123.herokuapp.com/api/auth/google/callback` to Authorization callback URL
+- Add `http://your-app-name-123.herokuapp.com/api/auth/github/callback` to Authorization callback URL
 
 Try to log in  `Log in with Github` again, and you're golden!

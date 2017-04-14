@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const GitHubStrategy = require('passport-github').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
 
 let secret = {
@@ -21,10 +21,10 @@ const database = {
 app.use(passport.initialize());
 
 passport.use(
-    new GoogleStrategy({
+    new GitHubStrategy({
         clientID:  secret.CLIENT_ID,
         clientSecret: secret.CLIENT_SECRET,
-        callbackURL: `/api/auth/google/callback`
+        callbackURL: `/api/auth/github/callback`
     },
     (accessToken, refreshToken, profile, cb) => {
         // Job 1: Set up Mongo/Mongoose, create a User model which store the
@@ -53,11 +53,11 @@ passport.use(
     )
 );
 
-app.get('/api/auth/google',
-    passport.authenticate('google', {scope: ['profile']}));
+app.get('/api/auth/github',
+    passport.authenticate('github', {scope: ['profile']}));
 
-app.get('/api/auth/google/callback',
-    passport.authenticate('google', {
+app.get('/api/auth/github/callback',
+    passport.authenticate('github', {
         failureRedirect: '/',
         session: false
     }),

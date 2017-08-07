@@ -25,6 +25,10 @@ const app = express();
 // };
 
 app.use(passport.initialize());
+app.use(bodyParser.json());
+
+
+//here go the api endpoints for db...
 
 passport.use(
     new GoogleStrategy({

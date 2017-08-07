@@ -1,6 +1,7 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 import Header from './header';
+import SignOut from './sign-out';
 import QuestionPage from './question-page';
 import LoginPage from './login-page';
 
@@ -51,6 +52,7 @@ class App extends React.Component {
         return (
             <section className="questions-page">
                 <Header />
+                <SignOut />
                 <QuestionPage />
             </section>
         );

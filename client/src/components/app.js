@@ -2,6 +2,7 @@ import React from 'react';
 import * as Cookies from 'js-cookie';
 import Header from './header';
 import SignOut from './sign-out';
+import AppInfo from './app-info';
 import QuestionPage from './question-page';
 import LoginPage from './login-page';
 
@@ -45,6 +46,7 @@ class App extends React.Component {
             return (
                 <section className="login-page">
                     <Header />
+                    <AppInfo />
                     <LoginPage />
                 </section>
             );

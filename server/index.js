@@ -98,7 +98,9 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
+        console.log("Starting server on port", port);
         server = app.listen(port, () => {
+            console.log("Server listening on port", port);
             resolve();
         }).on('error', reject);
     });

@@ -1,8 +1,14 @@
-const path = require('path');
+i should have mentioned const path = require('path');
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const mongoose = require('mongoose');
+const bodyParser = require ('body-parser');
+
+// require ('dotenv').config();
+const {DATABASE_URL, PORT} = process.env;
+const {Question, User} = require('./models');
 
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
@@ -15,8 +21,8 @@ if(process.env.NODE_ENV != 'production') {
 
 const app = express();
 
-const database = {
-};
+// const database = {
+// };
 
 app.use(passport.initialize());
 

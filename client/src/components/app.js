@@ -4,7 +4,7 @@ import Header from './header';
 import SignOut from './sign-out';
 import AppInfo from './app-info';
 import QuestionPage from './question-page';
-import LoginPage from './login-page';
+import GoogleSignIn from './google-sign-in';
 
 class App extends React.Component {
     constructor(props) {
@@ -47,7 +47,7 @@ class App extends React.Component {
                 <section className="login-page">
                     <Header />
                     <AppInfo />
-                    <LoginPage />
+                    <GoogleSignIn />
                 </section>
             );
         }

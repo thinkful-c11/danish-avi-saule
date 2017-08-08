@@ -150,21 +150,33 @@ app.get(/^(?!\/api(\/|$))/, (req, res) => {
 let server;
 function runServer(port=3001) {
     return new Promise((resolve, reject) => {
+        mongoose.connect(DATABASE_URL,function(err){
+            if(err) {
+                console.log('Something wrong with mongoose connection');
+                console.log('MLab connected!');
+                return reject(err);
+            }
+        });
         console.log("Starting server on port", port);
         server = app.listen(port, () => {
             console.log("Server listening on port", port);
             resolve();
-        }).on('error', reject);
+        }).on('error', err=>{
+            mongoose.disconnect();
+            return reject(err);
+        });
     });
 }
 
 function closeServer() {
-    return new Promise((resolve, reject) => {
-        server.close(err => {
-            if (err) {
-                return reject(err);
-            }
-            resolve();
+    return mongoose.disconnect().then(() => {
+        return new Promise((resolve, reject) => {
+            server.close(err => {
+                if (err) {
+                    return reject(err);
+                }
+                resolve();
+            });
         });
     });
 }

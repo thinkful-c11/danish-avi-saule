@@ -1,25 +1,18 @@
 
-// {"question 1":"[INFORMAL] hi, my name is...","answer 2":"hej jeg hedder"}
-// //{"question 2":"[FORMAL] hello, my name is...","answer 2":"goddag jeg hedder"}
-// {"question 3":"[INFORMAL] nice to meet you","answer 3":"hyggeligt at møde dig"}
-// {"question 4":"[FORMAL] nice to meet you","answer 4": "rart at møde dig"}
-// {"question 5":"do you speak English?", "answer 5":"taler du engelsk?"}
-{"question 6":"excuse me", "answer 6": " undskyld"}
-
-
-
-
-// excuse me ------------------------------ undskyld
-// yes ------------------------------------ ja
-// a little ------------------------------- lidt
-// no ------------------------------------- nej
-// goodbye -------------------------------- farvel
-// I love you ----------------------------- jeg elsker dig
-// I love you too ------------------------- jeg elsker også dig
-// a coffee ------------------------------- en kaffe
-// [INFORMAL] thank you ------------------- tak
-// [FORMAL] thank you very much ----------- mange tak
-// [FORMAL PHRASE] thank you very much ---- tusind tak skal du have
-// you are welcome ------------------------ velbekomme
-// [FORMAL PHRASE] you are welcome -------- det var så lidt
-// really --------------------------------- virkelig
+{"question":"excuse me", "answer": "undskyld"}
+{"question": "yes", "answer": "ja"}
+{"question":"a little","answer":"lidt"}
+{"question": "goodbye", "answer":"farvel"}
+{"question":"a coffee","answer":"en kaffe"}
+{"question":"thank you","answer":"tak"}
+{"question":"really","answer":"virkelig"}
+{"question":"apple","answer":"æble"}
+{"question":"woman", "answer":"kvinden"}
+{"question":"girl", "answer":"pige"}
+{"question":"she","answer":"hun"}
+{"question":"man","answer":"mand"}
+{"question":"boy","answer":"dreng"}
+{"question":"he","answer":"han"}
+{"question":"is","answer":"er"}
+{"question":"a","answer":"en"}
+{"question":"you","answer":"du"}

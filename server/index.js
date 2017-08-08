@@ -16,8 +16,10 @@ mongoose.connect(DATABASE_URL,function(err){
     if(err) console.log('Something wrong with mongoose connection');
     console.log('MLab connected!');
 });
-
-
+let secret = {
+  CLIENT_ID: process.env.CLIENT_ID,
+  CLIENT_SECRET: process.env.CLIENT_SECRET
+};
 if(process.env.NODE_ENV != 'production') {
     secret = require('./secret');
 }

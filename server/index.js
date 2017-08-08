@@ -19,8 +19,8 @@ const {Question, User} = require('./models');
 //     console.log('MLab connected!');
 // });
 let secret = {
-  CLIENT_ID: process.env.CLIENT_ID,
-  CLIENT_SECRET: process.env.CLIENT_SECRET
+    CLIENT_ID: process.env.CLIENT_ID,
+    CLIENT_SECRET: process.env.CLIENT_SECRET
 };
 if(process.env.NODE_ENV != 'production') {
     secret = require('./secret');
@@ -75,6 +75,7 @@ passport.use(
                     accessToken: accessToken,
                     name:profile.displayName
                 }, function(err,user){
+                    //console.log("USER IN STRATEGY",user);
                     return cb(null, user);
                 });
             } else {
@@ -93,8 +94,8 @@ passport.use(
 passport.use(
     new BearerStrategy(
         (token, done) => {
-            User.find({accessToken: token}, function(err, user){
-                if(!user.length) {
+            User.findOne({accessToken: token}, function(err, user){
+                if(!user) {
                     return done(null, false);
                 }
             // Job 3: Update this callback to try to find a user with a
@@ -127,17 +128,50 @@ app.get('/api/auth/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.get('/api/me',
-    passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json({
-        googleId: req.user.googleId
-    })
-);
+// app.get('/api/me',
+//     passport.authenticate('bearer', {session: false}),
+//     (req, res) => {
+//         console.log("HELLOOOOOO!",req.user)
+//         return res.json({
+//             hello:'it worked!',
+//             googleId: req.user.googleId
+//         })
+//     }
+// );
 
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => res.json(['Question 1', 'Question 2'])
-);
+    (req, res) => 
+    {
+        Question
+        .find()
+        .then(questions =>{
+            console.log(questions);
+            return res.json(questions.map(question =>question.apiRepr()));
+        })
+        .catch(err => {
+            //console.log(err);
+            res.status(500).json({error: 'Something went wrong!!!'});
+        });
+    });
+
+
+    // app.get('/api/question',
+    // passport.authenticate('bearer', {session: false}),
+    // (req, res) => 
+    // {
+    //     Question
+    //     .find()
+    //     .then(questions =>{
+    //         console.log(questions);
+    //         return res.json(questions[0](question =>question.apiRepr()));
+    //     })
+    //     .catch(err => {
+    //         //console.log(err);
+    //         res.status(500).json({error: 'Something went wrong!!!'});
+    //     });
+    // });
+
 
 // Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));

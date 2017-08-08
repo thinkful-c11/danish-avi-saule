@@ -12,10 +12,10 @@ const {Question, User} = require('./models');
 
 //const {DATABASE_URL, PORT} = require('./config');
 
-mongoose.connect(DATABASE_URL,function(err){
-    if(err) console.log('Something wrong with mongoose connection');
-    console.log('MLab connected!');
-});
+// mongoose.connect(DATABASE_URL,function(err){
+//     if(err) console.log('Something wrong with mongoose connection');
+//     console.log('MLab connected!');
+// });
 let secret = {
   CLIENT_ID: process.env.CLIENT_ID,
   CLIENT_SECRET: process.env.CLIENT_SECRET
@@ -99,6 +99,7 @@ passport.use(
             // matching access token.  If they exist, let em in, if not,
             // don't.
                 return done(null, user);
+                console.log(user)
             });
         }
     )

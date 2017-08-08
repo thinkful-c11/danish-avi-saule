@@ -6,6 +6,8 @@ const BearerStrategy = require('passport-http-bearer').Strategy;
 const mongoose = require('mongoose');
 const bodyParser = require ('body-parser');
 
+mongoose.Promise = global.Promise;
+
 require ('dotenv').config();
 const {DATABASE_URL, PORT} = process.env;
 const {Question, User} = require('./models');

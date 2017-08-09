@@ -1,4 +1,4 @@
-import * as actions from '../actions';
+import * as action from '../actions';
 const initialState = {
     currentUser: null,
     getUser: false, //If user tries to use an access token get them
@@ -6,11 +6,11 @@ const initialState = {
 };
 export const reducer = (state=initialState,action) => {
     switch (action.type){
-        case REQUEST_GET_USER:
+        case action.REQUEST_GET_USER:
             return Object.assign({},state,{getUser:true})
-        case ALLOW_GET_USER:
+        case action.ALLOW_GET_USER:
             return Object.assign({},state,{currentUser: action.currentUser,getUser:false})
-        case REJECT_GET_USER:
+        case action.REJECT_GET_USER:
             return Object.assign({},state,{error: action.error,getUser: false})
         default:
             return state;

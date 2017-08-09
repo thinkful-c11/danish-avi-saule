@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import * as Cookies from 'js-cookie';
 import Header from './header';
 import SignOut from './sign-out';

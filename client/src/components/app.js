@@ -18,7 +18,7 @@ class App extends React.Component {
         }
     }
     render() {
-        if (!this.state.currentUser) {
+        if (!this.props.currentUser) {
             return (
                 <section className="login-page">
                     <Header />
@@ -36,5 +36,7 @@ class App extends React.Component {
         );
     }
 }
-
-export default App;
+const mapStateToProps=state=>({
+    currentUser: state.currentUser,
+});
+export default connect(mapStateToProps)(App);

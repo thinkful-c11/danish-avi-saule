@@ -33,9 +33,16 @@ export default class QuestionPage extends React.Component {
         );
 
         return (
-            <ul className="question-list">
-                {questions}
-            </ul>
+            // <ul className="question-list">
+            //     {questions}
+            // </ul>
+            <div className='questions-page'>
+                <form>
+                    {questions}
+                    <input type='text' placeholder='Type in the English translation'></input>
+                    <button type='submit'>Submit</button>
+                </form>
+            </div>
         );
     }
 }

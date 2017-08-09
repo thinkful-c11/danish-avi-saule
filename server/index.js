@@ -144,11 +144,11 @@ app.get('/api/questions',
     (req, res) => 
     {
         Question
-        .find()(
+        .find()
         .then(questions =>{
             console.log(questions);
             return res.json(questions.map(question =>question.apiRepr()));
-        }))
+        })
         .catch(err => {
             //console.log(err);
             res.status(500).json({error: 'Something went wrong!!!'});

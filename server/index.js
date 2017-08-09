@@ -141,8 +141,9 @@ app.get('/api/auth/logout', (req, res) => {
 
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
-    (req, res) => 
-    {
+    (req, res) => {
+        console.log("This is request",req);
+        console.log("This is response",res);
         Question
         .find()
         .then(questions =>{

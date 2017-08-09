@@ -18,7 +18,7 @@ class App extends React.Component {
         // Job 4: Redux-ify all of the state and fetch calls to async actions.
         const accessToken = Cookies.get('accessToken');
         if (accessToken) {
-            fetch('/api/me', {
+            fetch('/api/questions', {
                 headers: {
                     'Authorization': `Bearer ${accessToken}`
                 }

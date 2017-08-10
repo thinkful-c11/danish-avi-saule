@@ -7,7 +7,8 @@ export default class QuestionPage extends React.Component {
         super(props);
         this.state = {
             questions: [],
-            currentQuestion: 0
+            currentQuestion: 0,
+            value:''
         };
     }
 
@@ -28,14 +29,17 @@ export default class QuestionPage extends React.Component {
             })
         );
     }
-    handleAnswer(e){
-            e.preventDefault();
-        }
+    // handleAnswer(e){
+    //         this.setState({value: e.target.value});
+    //         console.log(e);
+
+
+    //     }
 
     render() {
-        const questions = this.state.questions.map((question, index) =>
-            <li key={index}>{question}</li>
-        );
+        // const questions = this.state.questions.map((question, index) =>
+        //     <li key={index}>{question}</li>
+        // );
         // console.log("This is questions:",{questions});
         // console.log("This is state",this.state);
         // console.log("This is state.questions",this.state.questions);
@@ -65,9 +69,12 @@ export default class QuestionPage extends React.Component {
             // </ul>
             <div className='questions-page'>
                  <div className='english-question-here'>{this.state.questions[this.state.currentQuestion].question}</div> 
-                <form>
-                    <input type='text' placeholder='Type in the English translation' onClick={(e)=>console.log("This is e",e.currentTarget)}></input>
+                <form onSubmit={(e)=> {e.preventDefault()
+                    console.log("Do this!")
+                }}>
+                    <input type='text' placeholder='Type in the English translation' value={this.state.value} onChange={(e) => this.setState({value:e.target.value})}></input>
                     <button type='submit'>Submit</button>
+                    
                 </form>
             </div>
         );

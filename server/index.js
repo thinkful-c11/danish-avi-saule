@@ -34,17 +34,18 @@ app.use(bodyParser.json());
 
 //here go the api endpoints for db...
 
-app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
-    Question
-    .find()
-    .then(questions =>{
-        return res.json(questions.map(question => question.apiRepr()));
-    })
-    .catch(err => {
-        console.log(err);
-        res.status(500).json({error: 'Something went wrong!!!'});
-    });
-});
+// app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
+//     Question
+//     .find()
+//     .then(questions =>{
+//         return res.json(questions.map(question => question.apiRepr()));
+//     })
+//     .catch(err => {
+//         console.log(err);
+//         res.status(500).json({error: 'Something went wrong!!!'});
+//     });
+// });
+
 
 app.get('/api/users/:accessToken',  (req, res) => {
     User
@@ -65,20 +66,21 @@ passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
         clientSecret: secret.CLIENT_SECRET,
-        callbackURL: `/api/auth/google/callback`
+        callbackURL: '/api/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
         User.find({googleId:profile.id}, function(err,user){
             if (!user.length){
                 User.create({
                     googleId: profile.id,
-                    accessToken: accessToken,
-                    name:profile.displayName
+                    name:profile.displayName,
+                    accessToken: accessToken
                 }, function(err,user){
-                    //console.log("USER IN STRATEGY",user);
+                    console.log(user);
                     return cb(null, user);
                 });
             } else {
+                console.log(user);
                 return cb(null,user);
             }
         });
@@ -95,18 +97,22 @@ passport.use(
     new BearerStrategy(
         (token, done) => {
             User.findOne({accessToken: token}, function(err, user){
+
+                if (err) {console.error(err); done(err);}
                 if(!user) {
                     return done(null, false);
                 }
+                console.log('UserToken',user);
             // Job 3: Update this callback to try to find a user with a
             // matching access token.  If they exist, let em in, if not,
-            // don't.
+            // don'
                 return done(null, user);
-                console.log(user)
             });
         }
     )
 );
+
+
 
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
@@ -117,6 +123,7 @@ app.get('/api/auth/google/callback',
         session: false
     }),
     (req, res) => {
+        console.log('THAT IS HAPPENING!');
         res.cookie('accessToken', req.user.accessToken, {expires: 0});
         res.redirect('/');
     }
@@ -128,16 +135,16 @@ app.get('/api/auth/logout', (req, res) => {
     res.redirect('/');
 });
 
-// app.get('/api/me',
-//     passport.authenticate('bearer', {session: false}),
-//     (req, res) => {
-//         console.log("HELLOOOOOO!",req.user)
-//         return res.json({
-//             hello:'it worked!',
-//             googleId: req.user.googleId
-//         })
-//     }
-// );
+app.get('/api/me',
+    passport.authenticate('bearer', {session: false}),
+    (req, res) => {
+        console.log("HELLOOOOOO!",req.user)
+        return res.json({
+            hello:'it worked!',
+            googleId: req.user.googleId
+        })
+    }
+);
 
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
@@ -155,23 +162,6 @@ app.get('/api/questions',
             res.status(500).json({error: 'Something went wrong!!!'});
         });
     });
-
-
-    // app.get('/api/question',
-    // passport.authenticate('bearer', {session: false}),
-    // (req, res) => 
-    // {
-    //     Question
-    //     .find()
-    //     .then(questions =>{
-    //         console.log(questions);
-    //         return res.json(questions.map(question =>question.apiRepr()));
-    //     })
-    //     .catch(err => {
-    //         //console.log(err);
-    //         res.status(500).json({error: 'Something went wrong!!!'});
-    //     });
-    // });
 
 
 // Serve the built client

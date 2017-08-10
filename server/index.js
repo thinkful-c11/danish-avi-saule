@@ -123,7 +123,8 @@ app.get('/api/auth/google/callback',
         session: false
     }),
     (req, res) => {
-        console.log('THAT IS HAPPENING!');
+        console.log("This should be req.user",req.user);
+        console.log('THAT IS HAPPENING req.user.accesToken!',req.user.accessToken);
         res.cookie('accessToken', req.user.accessToken, {expires: 0});
         res.redirect('/');
     }

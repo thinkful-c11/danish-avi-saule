@@ -69,8 +69,8 @@ passport.use(
         callbackURL: '/api/auth/google/callback'
     },
     (accessToken, refreshToken, profile, cb) => {
-        User.find({googleId:profile.id}, function(err,user){
-            if (!user.length){
+        User.find({googleId:profile.id}, function(err,users){
+            if (!users.length){
                 User.create({
                     googleId: profile.id,
                     name:profile.displayName,
@@ -80,8 +80,8 @@ passport.use(
                     return cb(null, user);
                 });
             } else {
-                console.log(user);
-                return cb(null,user);
+                console.log(users);
+                return cb(null,users[0]);
             }
         });
     }

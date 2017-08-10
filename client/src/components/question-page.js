@@ -6,7 +6,8 @@ export default class QuestionPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            questions: []
+            questions: [],
+            currentQuestion: 0
         };
     }
 
@@ -27,6 +28,9 @@ export default class QuestionPage extends React.Component {
             })
         );
     }
+    handleAnswer(e){
+            e.preventDefault();
+        }
 
     render() {
         const questions = this.state.questions.map((question, index) =>
@@ -37,21 +41,32 @@ export default class QuestionPage extends React.Component {
         // console.log("This is state.questions",this.state.questions);
         // console.log("This is state.questions[0]",this.state.questions[0]);
         // var result = objArray.map(function(a) {return a.foo;});
-        const questionsAnswers=this.state.questions;
-        console.log("This is questionsAnswers",questionsAnswers);
-        let englishTranslation=questionsAnswers.map(function(questionValue){return questionValue.question});
-        console.log("This is englishTranslation",englishTranslation);
-        console.log("This is the first index?",englishTranslation[0]);
+        // console.log("This is the answer!",this.state.questions[this.state.currentQuestion]);
+        // console.log("This is state.questions",this.state.questions);
+        // const questionsAnswers=this.state.questions;
+        // console.log("This is questionsAnswers",questionsAnswers);
+        // let englishTranslation=questionsAnswers.map(function(questionValue){return questionValue.question});
+        // console.log("This is englishTranslation",englishTranslation);
+        // console.log("This is the first index?",englishTranslation[0]);
+        // console.log("This is currentQuestion",englishTranslation[this.state.currentQuestion]);
+        // let danishWord=questionsAnswers.map(function(answerValue){return answerValue.answer});
+        // console.log("This is Danish word",danishWord);
+        // console.log("This is Danish with currentQuestion",danishWord[this.state.currentQuestion]);
 
+        //this.handleAnswer(e)
+        if(this.state.questions.length===0){
+            return (
+                <div>Loading!</div>
+            );
+        }
         return (
             // <ul className="question-list">
             //     {questions}
             // </ul>
             <div className='questions-page'>
-                <div class='english-question-here'>{englishTranslation[0]}</div>
+                 <div className='english-question-here'>{this.state.questions[this.state.currentQuestion].question}</div> 
                 <form>
-                    {questions}
-                    <input type='text' placeholder='Type in the English translation'></input>
+                    <input type='text' placeholder='Type in the English translation' onClick={(e)=>console.log("This is e",e.currentTarget)}></input>
                     <button type='submit'>Submit</button>
                 </form>
             </div>

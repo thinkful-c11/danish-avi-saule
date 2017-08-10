@@ -1,3 +1,14 @@
+*{
+    box-sizing: border-box;
+}
+.header{
+    height: 15vh;
+    background-color: #0c2a3d;
+}
 .header h1{
     text-align: center;
+    padding-top: .8em;
+    margin: 0;
+    color: #f5f9fa;
+    font-size: 3em;
 }

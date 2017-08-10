@@ -1,5 +1,6 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
+import './question-page.css';
 
 export default class QuestionPage extends React.Component {
     constructor(props) {

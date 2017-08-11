@@ -70,7 +70,7 @@ export default class QuestionPage extends React.Component {
             <div className='questions-page'>
                  <div className='english-question-here'>{this.state.questions[this.state.currentQuestion].question}</div> 
                 <form onSubmit={(e)=> {e.preventDefault()
-                    console.log("Do this!")
+                    console.log("What is e",e.currentTarget);
                 }}>
                     <input type='text' placeholder='Type in the English translation' value={this.state.value} onChange={(e) => this.setState({value:e.target.value})}></input>
                     <button type='submit'>Submit</button>

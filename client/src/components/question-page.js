@@ -30,7 +30,6 @@ export default class QuestionPage extends React.Component {
     }
     handleSubmit(e){
         e.preventDefault();
-        console.log("What is e",this.state.value);
         if(this.state.value===this.state.questions[this.state.currentQuestion].answer){
             alert("correct!");
         }

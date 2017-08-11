@@ -9,12 +9,8 @@ import GoogleSignIn from './google-sign-in';
 import {getUser} from '../actions';
 
 class App extends React.Component {
-
     componentDidMount() {
-        // Job 4: Redux-ify all of the state and fetch calls to async actions.
-        //DONE?
         const accessToken = Cookies.get('accessToken');
-        console.log("Hi to my access token again",accessToken);
         if (accessToken) {
             this.props.dispatch(getUser(accessToken));
         }

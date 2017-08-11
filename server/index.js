@@ -12,12 +12,6 @@ require ('dotenv').config();
 const {DATABASE_URL, PORT} = process.env;
 const {Question, User} = require('./models');
 
-//const {DATABASE_URL, PORT} = require('./config');
-
-// mongoose.connect(DATABASE_URL,function(err){
-//     if(err) console.log('Something wrong with mongoose connection');
-//     console.log('MLab connected!');
-// });
 let secret = {
     CLIENT_ID: process.env.CLIENT_ID,
     CLIENT_SECRET: process.env.CLIENT_SECRET
@@ -31,36 +25,16 @@ const app = express();
 app.use(passport.initialize());
 app.use(bodyParser.json());
 
-
-//here go the api endpoints for db...
-
-// app.get('/api/questions', passport.authenticate('bearer', {session: false}), (req, res) => {
-//     Question
-//     .find()
-//     .then(questions =>{
-//         return res.json(questions.map(question => question.apiRepr()));
-//     })
-//     .catch(err => {
-//         console.log(err);
-//         res.status(500).json({error: 'Something went wrong!!!'});
-//     });
-// });
-
-
 app.get('/api/users/:accessToken',  (req, res) => {
     User
     .findOne({accessToken: req.params.accessToken})
     .then(user =>{
-        console.log(user);
         return res.json(user);
     })
     .catch(err => {
-        console.log(err);
         res.status(500).json({error: 'Something went wrong!!!'});
     });
 });
-
-
 
 passport.use(
     new GoogleStrategy({
@@ -76,43 +50,28 @@ passport.use(
                     name:profile.displayName,
                     accessToken: accessToken
                 }, function(err,user){
-                    console.log(user);
                     return cb(null, user);
                 });
             } else {
-                console.log(users);
                 return cb(null,users[0]);
             }
         });
     }
     ));
 
-        // Job 1: Set up Mongo/Mongoose, create a User model which store the
-        // google id, and the access token
-        // Job 2: Update this callback to either update or create the user
-        // so it contains the correct access token
-
-
 passport.use(
     new BearerStrategy(
         (token, done) => {
             User.findOne({accessToken: token}, function(err, user){
-
-                if (err) {console.error(err); done(err);}
+                if (err) {done(err);}
                 if(!user) {
                     return done(null, false);
                 }
-                console.log('UserToken',user);
-            // Job 3: Update this callback to try to find a user with a
-            // matching access token.  If they exist, let em in, if not,
-            // don'
                 return done(null, user);
             });
         }
     )
 );
-
-
 
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
@@ -123,8 +82,6 @@ app.get('/api/auth/google/callback',
         session: false
     }),
     (req, res) => {
-        console.log("This should be req.user",req.user);
-        console.log('THAT IS HAPPENING req.user.accesToken!',req.user.accessToken);
         res.cookie('accessToken', req.user.accessToken, {expires: 0});
         res.redirect('/');
     }
@@ -139,7 +96,6 @@ app.get('/api/auth/logout', (req, res) => {
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
-        console.log("HELLOOOOOO!",req.user)
         return res.json({
             hello:'it worked!',
             googleId: req.user.googleId
@@ -150,16 +106,12 @@ app.get('/api/me',
 app.get('/api/questions',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
-        console.log("This is request",req);
-        console.log("This is response",res);
         Question
         .find()
         .then(questions =>{
-            console.log(questions);
             return res.json(questions.map(question =>question.apiRepr()));
         })
         .catch(err => {
-            //console.log(err);
             res.status(500).json({error: 'Something went wrong!!!'});
         });
     });
@@ -180,14 +132,10 @@ function runServer(port=3001) {
     return new Promise((resolve, reject) => {
         mongoose.connect(DATABASE_URL,function(err){
             if(err) {
-                console.log('Something wrong with mongoose connection');
-                console.log('MLab connected!');
                 return reject(err);
             }
         });
-        console.log("Starting server on port", port);
         server = app.listen(port, () => {
-            console.log("Server listening on port", port);
             resolve();
         }).on('error', err=>{
             mongoose.disconnect();

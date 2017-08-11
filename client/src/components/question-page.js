@@ -29,6 +29,16 @@ export default class QuestionPage extends React.Component {
             })
         );
     }
+    handleSubmit(e){
+        e.preventDefault();
+        console.log("What is e",this.state.value);
+        if(this.state.value===this.state.questions[this.state.currentQuestion].answer){
+            alert("correct!");
+        }
+        else{
+            alert("incorrect");
+        }
+    }
     // handleAnswer(e){
     //         this.setState({value: e.target.value});
     //         console.log(e);
@@ -63,15 +73,14 @@ export default class QuestionPage extends React.Component {
                 <div>Loading!</div>
             );
         }
+
         return (
             // <ul className="question-list">
             //     {questions}
             // </ul>
             <div className='questions-page'>
                  <div className='english-question-here'>{this.state.questions[this.state.currentQuestion].question}</div> 
-                <form onSubmit={(e)=> {e.preventDefault()
-                    console.log("What is e",e.currentTarget);
-                }}>
+                <form onSubmit={(e)=>this.handleSubmit(e)}>
                     <input type='text' placeholder='Type in the English translation' value={this.state.value} onChange={(e) => this.setState({value:e.target.value})}></input>
                     <button type='submit'>Submit</button>
                     

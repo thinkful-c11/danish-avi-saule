@@ -32,8 +32,8 @@ class App extends React.Component {
         return (
             <section className="questions-page">
                 <Header />
-                <SignOut />
                 <QuestionPage />
+                <SignOut />
             </section>
         );
     }

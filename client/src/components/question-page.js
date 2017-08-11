@@ -38,6 +38,10 @@ export default class QuestionPage extends React.Component {
         else{
             alert("incorrect");
         }
+        this.setState({
+            currentQuestion: this.state.currentQuestion+1,
+            value:''
+        })
     }
     // handleAnswer(e){
     //         this.setState({value: e.target.value});

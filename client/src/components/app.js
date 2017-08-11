@@ -7,7 +7,13 @@ import AppInfo from './app-info';
 import QuestionPage from './question-page';
 import GoogleSignIn from './google-sign-in';
 import {getUser} from '../actions';
-
+//  ______________________
+// |                      |
+// |     MAIN APP HERE    |
+// |______________________|
+// (\__/) ||
+// (•ㅅ•) ||
+// / 　 づ
 class App extends React.Component {
     componentDidMount() {
         const accessToken = Cookies.get('accessToken');

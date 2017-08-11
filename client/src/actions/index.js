@@ -45,7 +45,14 @@ export const getUser=(accessToken)=>dispatch=>{
             dispatch(rejectGetUser(error));
         })
 }
-
+export const CORRECT_MODAL='CORRECT_MODAL';
+export const correctModal=()=>({
+    type:CORRECT_MODAL
+})
+export const INCORRECT_MODAL='INCORRECT_MODAL';
+export const incorrectModal=()=>({
+    type:INCORRECT_MODAL
+})
 export const NEXT_WORD='NEXT_WORD';
 export const nextWord=()=>({
     type:NEXT_WORD,

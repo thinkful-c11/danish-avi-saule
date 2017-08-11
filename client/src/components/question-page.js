@@ -1,6 +1,8 @@
 import React from 'react';
 import * as Cookies from 'js-cookie';
 import './question-page.css';
+import CorrectModal from './correct-modal';
+import IncorrectModal from './incorrect-modal';
 
 export default class QuestionPage extends React.Component {
     constructor(props) {
@@ -32,7 +34,7 @@ export default class QuestionPage extends React.Component {
         e.preventDefault();
         console.log("What is e",this.state.value);
         if(this.state.value===this.state.questions[this.state.currentQuestion].answer){
-            alert("correct!");
+            alert('correct');
         }
         else{
             alert("incorrect");

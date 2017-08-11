@@ -35,7 +35,7 @@ app.get('/api/users/:accessToken',  (req, res) => {
         res.status(500).json({error: 'Something went wrong!!!'});
     });
 });
-
+//Google Strategy
 passport.use(
     new GoogleStrategy({
         clientID:  secret.CLIENT_ID,
@@ -59,6 +59,8 @@ passport.use(
     }
     ));
 
+
+//Bearer Strategy
 passport.use(
     new BearerStrategy(
         (token, done) => {
@@ -73,6 +75,7 @@ passport.use(
     )
 );
 
+//Google Auth
 app.get('/api/auth/google',
     passport.authenticate('google', {scope: ['profile']}));
 
@@ -93,6 +96,7 @@ app.get('/api/auth/logout', (req, res) => {
     res.redirect('/');
 });
 
+//Authentication
 app.get('/api/me',
     passport.authenticate('bearer', {session: false}),
     (req, res) => {
@@ -116,12 +120,8 @@ app.get('/api/questions',
         });
     });
 
-
-// Serve the built client
 app.use(express.static(path.resolve(__dirname, '../client/build')));
 
-// Unhandled requests which aren't for the API should serve index.html so
-// client-side routing using browserHistory can function
 app.get(/^(?!\/api(\/|$))/, (req, res) => {
     const index = path.resolve(__dirname, '../client/build', 'index.html');
     res.sendFile(index);

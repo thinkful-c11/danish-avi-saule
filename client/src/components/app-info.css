@@ -1,3 +1,17 @@
+*{
+    box-sizing: border-box;
+    margin: 0;
+}
 .app-info-p p{
     text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-weight: 300;
+    font-size: 25px;
+    margin-left: 3em;
+    margin-right: 3em;
+    padding-top: 175px;
+}
+.app-info-p{
+    height: 50vh;
+    color: #191919;
 }

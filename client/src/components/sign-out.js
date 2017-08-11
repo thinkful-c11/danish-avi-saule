@@ -1,5 +1,5 @@
 import React from 'react';
-import './sign-out.css';
+import './css/sign-out.css';
 
 export default function SignOut() {
     return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import './app-info.css';
+import './css/app-info.css';
 
 export default function AppInfo() {
     //On the page rendering the register/sign in page this will display information about the app for the user to know what the app is about!

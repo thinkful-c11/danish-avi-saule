@@ -1,5 +1,5 @@
 import React from 'react';
-import './google-sign-in.css';
+import './css/google-sign-in.css';
 
 export default function GoogleSignIn() {
     return (

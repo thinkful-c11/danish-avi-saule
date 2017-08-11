@@ -23,6 +23,8 @@ a.fill-google-button{
     background: #19567d;
     border: none;
     padding: 20px;
+    opacity: 0.9;
+    filter: alpha(opacity=90);
 }
 .google-logo{
     width: 3em;

@@ -5,6 +5,8 @@
     text-align: center;
     border-radius: 10px;
     background: #0C2B3E;
+    opacity: 0.97;
+    filter: alpha(opacity=97);
 }
 .english-question-here{
     border-radius: 10px;
@@ -21,6 +23,8 @@
     font-size: 20px;
     background: #3D1F0C;
     color: #f5f9fa;
+    opacity: 0.8;
+    filter: alpha(opacity=80);
 }
 .questions-page input{
     margin-bottom: 1.5em;

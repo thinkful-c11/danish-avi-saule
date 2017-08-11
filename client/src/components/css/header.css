@@ -4,8 +4,8 @@
 .header{
     height: 30vh;
     background-color: #0c2a3d;
-    opacity: 0.95;
-    filter: alpha(opacity=95);
+    /* opacity: 0.95;
+    filter: alpha(opacity=95); */
 }
 .header h1{
     text-align: center;
